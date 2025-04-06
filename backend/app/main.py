@@ -11,10 +11,10 @@ app.include_router(api_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Разрешить все домены, вы можете ограничить на конкретные домены
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешить все методы (GET, POST и т. д.)
-    allow_headers=["*"],  # Разрешить все заголовки
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 setup_dishka(container, app)

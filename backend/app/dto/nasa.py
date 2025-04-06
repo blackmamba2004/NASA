@@ -1,7 +1,6 @@
 from datetime import date
 from typing import Optional
 
-# from fastapi import Query
 from pydantic import Field
 
 from backend.app.enums import RoverCameraEnum, RoverNameEnum

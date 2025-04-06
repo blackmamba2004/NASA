@@ -13,16 +13,13 @@ router = APIRouter(route_class=DishkaRoute)
 
 @router.get(
     "/nasa/photos",
-    # response_model=MarsPhotoListDTO
+    response_model=MarsPhotoListDTO
 )
 async def get_photos(
     martian_sol_filters: Annotated[MartianSolFilters, Query()],
     nasa_api_service: FromDishka[NasaAPIService],
 ):
-    response = await nasa_api_service.get_photos_with_info(martian_sol_filters)
-    return {
-        'data': response
-    }
+    return await nasa_api_service.get_photos_with_info(martian_sol_filters)
 
 @router.get(
     "/nasa/mission"
