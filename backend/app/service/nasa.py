@@ -7,10 +7,13 @@ import aiohttp
 from backend.app.components import AppLogger
 from backend.app.components.utils.pages import paginate
 from backend.app.dto import (
-    BaseSchema, MarsPhotoListDTO, MartianSolFilters, MissionFilters
+    BaseSchema, 
+    MarsPhotoListDTO, 
+    MartianSolFilters, 
+    MissionFilters,
+    Response
 )
 from backend.app.enums import RoverNameEnum
-
 
 
 class NasaAPIService:
@@ -36,7 +39,7 @@ class NasaAPIService:
 
     async def get_photos_with_info(
         self, martian_sol_filters: MartianSolFilters
-    ) -> MarsPhotoListDTO:
+    ) -> Response[MarsPhotoListDTO]:
         query_str = self.build_query_string(martian_sol_filters)
 
         async with aiohttp.ClientSession() as client:
@@ -44,17 +47,9 @@ class NasaAPIService:
                 f"{self.BASE_URL}/mars-photos/api/v1/"\
                 f"rovers/curiosity/photos?{query_str}"
             )
-            if response.status == 200:
-                return await response.json()
-            
-            error_text = await response.text()
-            print(error_text)
-            self._logger.error(
-                "Ошибка обращения к API Nasa", exc_info=None
-            )
-            return { 
-                "photos": []
-            }
+            data = await response.json()
+
+            return Response(data=data)
     
     async def get_mission_manifest_info(
         self, 
@@ -82,11 +77,11 @@ class NasaAPIService:
 
         data["photo_manifest"]["sol_activities"] = sol_activities
         del data["photo_manifest"]["photos"]
-        
-        return {
-            "paginator": paginator,
-            "data": data
-        } 
+
+        return Response(
+            paginator=paginator, 
+            data=data
+        )
 
     async def filters(
         self, 

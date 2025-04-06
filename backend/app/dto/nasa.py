@@ -3,8 +3,10 @@ from typing import Optional
 
 from pydantic import Field
 
-from backend.app.enums import RoverCameraEnum, RoverNameEnum
+
+from backend.app.components.mixins import FilterMixin
 from backend.app.dto import BaseSchema
+from backend.app.enums import RoverCameraEnum, RoverNameEnum
 
 
 class MarsCameraDTO(BaseSchema):
@@ -35,7 +37,7 @@ class MarsPhotoListDTO(BaseSchema):
     photos: list[MarsPhotoDTO]
 
 
-class MartianSolFilters(BaseSchema):
+class MartianSolFilters(BaseSchema, FilterMixin):
 
     sol: Optional[int] = Field(None, description="Марсианское вращение или день")
     earth_date: Optional[date] = Field(None, description="Дата на Земле в формате YYYY-MM-DD")
@@ -43,7 +45,7 @@ class MartianSolFilters(BaseSchema):
     page: Optional[int] = Field(1, gt=0, description='Страница пагинации')
 
 
-class MissionFilters(BaseSchema):
+class MissionFilters(BaseSchema, FilterMixin):
     rover_name: RoverNameEnum = Field(..., description='Имя ровера')
     sol_from: Optional[int] = Field(1, description='Минимальный день на Марсе')
     sol_to: Optional[int] = Field(4500, description='Максимальный день на Марсе')

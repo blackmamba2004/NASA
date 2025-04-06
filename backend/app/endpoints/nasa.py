@@ -4,7 +4,13 @@ from dishka.integrations.fastapi import DishkaRoute, FromDishka
 from fastapi import APIRouter, Query
 
 
-from backend.app.dto import MarsPhotoListDTO, MartianSolFilters, MissionFilters
+from backend.app.dto import (
+    MarsPhotoListDTO, 
+    MartianSolFilters, 
+    MissionFilters,
+    Response
+)
+
 from backend.app.service import NasaAPIService
 
 
@@ -13,7 +19,7 @@ router = APIRouter(route_class=DishkaRoute)
 
 @router.get(
     "/nasa/photos",
-    response_model=MarsPhotoListDTO
+    response_model=Response[MarsPhotoListDTO]
 )
 async def get_photos(
     martian_sol_filters: Annotated[MartianSolFilters, Query()],

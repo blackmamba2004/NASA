@@ -10,6 +10,8 @@ services:
       - "8000:8000"
     depends_on:
       - nasa-frontend
+    volumes:
+      - ./backend:/app/backend
     
   nasa-frontend:
     build:
@@ -18,3 +20,5 @@ services:
     container_name: nasa-frontend
     ports:
       - "3000:3000"
+    volumes:
+      - ./app:/app
