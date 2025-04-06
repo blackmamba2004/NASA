@@ -1,0 +1,24 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 16px;
+    padding: 16px;
+  }
+  
+.card {
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 16px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+font-size: 18px;
+font-weight: bold;
+}
+
+.card-body {
+font-size: 14px;
+color: #666;
+}

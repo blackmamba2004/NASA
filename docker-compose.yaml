@@ -1,0 +1,20 @@
+services:
+  nasa-backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: nasa-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - nasa-frontend
+    
+  nasa-frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: nasa-frontend
+    ports:
+      - "3000:3000"  # Внешний 3000, внутренний nginx 80

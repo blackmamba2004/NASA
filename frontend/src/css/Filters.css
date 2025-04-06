@@ -1,0 +1,30 @@
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+  }
+  
+  .filter-group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .filter-group input,
+  .filter-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
