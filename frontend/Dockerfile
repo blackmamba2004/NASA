@@ -5,13 +5,10 @@ WORKDIR /app
 COPY ./package*.json ./
 RUN npm install
 
-COPY ./frontend ./
+COPY ./ ./
 
-SHELL ["/bin/bash", "-c"]
-CMD ["npm", "run", "start"]
+RUN npm run build
 
-# FROM nginx:alpine
+RUN npm install -g serve
 
-# COPY --from=build /app/dist /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "build", "-l", "3000"]
